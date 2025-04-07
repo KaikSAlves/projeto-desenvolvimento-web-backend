@@ -29,7 +29,7 @@ endpoints.post('/usuario', async (req, resp) => {
     resp.send({id});
 });
 
-//update
+//put
 
 endpoints.put('/usuario/:id', async (req, resp) => {
     let id = req.params.id;
