@@ -5,7 +5,7 @@ import connection from "./connection.js";
 export async function inserir(usuario){
   const comando = `INSERT INTO tb_usuario 
     (nm_usuario, email_usuario, tel_usuario, senha_usuario)
-	  values (?, ?, ?, ?, ?)`;
+	  values (?, ?, ?, ?)`;
 
   
   let [info] = await connection.query(comando,
