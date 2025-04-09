@@ -22,6 +22,13 @@ endpoints.get('/feedback', async (req, resp) => {
     resp.send(feedbacks);
 });
 
+endpoints.get("/feedback/contar", async (req ,resp) => {
+    let quantidadeFeedbacks = await f.pegarQuantidadeFeedbacks();
+
+    resp.send({quantidadeFeedbacks});
+});
+
+
 endpoints.get('/feedback/:id', async (req, resp) => {
     let id = req.params.id;
     let feedback = await f.buscarPorId(id) ;

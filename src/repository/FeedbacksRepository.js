@@ -20,7 +20,6 @@ export async function listar(){
     const comando = `SELECT * FROM tb_feedback`;
 
     let info = await connection.query(comando);
-
     return info[0];
 }
 
@@ -31,6 +30,13 @@ export async function buscarPorId(id){
     let info = await connection.query(comando, [id]);
 
     return info[0];
+}
+
+export async function pegarQuantidadeFeedbacks(){
+    const comando = `SELECT count(*) AS quantidadeFeedback FROM tb_feedback`;
+    let [info] = await connection.query(comando);
+
+    return info[0].quantidadeFeedback;
 }
 
 //update
