@@ -16,11 +16,8 @@ insert into tb_usuario (nm_usuario, email_usuario, tel_usuario, senha_usuario)
 create table if not exists tb_feedback (
 	id_feedback int primary key auto_increment,
     data_feedback date,
-    qualidade_feedback varchar(20) not null,
-    expectativa_feedback varchar(20) not null,
-    sabor_feedback varchar(20) not null,
-    apresentacao_feedback varchar(20) not null,
-    valor_feedback varchar(20) not null
+    nvl_avaliacao_feedback int not null,
+    descricao_feedback VARCHAR(250)
 );
 
 create table if not exists tb_produto (

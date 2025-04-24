@@ -4,12 +4,11 @@ import connection from "./connection.js";
 
 export async function inserir(feedback){
     const comando = `INSERT INTO tb_feedback 
-        (data_feedback, qualidade_feedback, expectativa_feedback, sabor_feedback, apresentacao_feedback,valor_feedback)
-        VALUES (?,?,?,?,?,?)`;
+        (data_feedback, nvl_avaliacao_feedback, descricao_feedback)
+        VALUES (?,?,?)`;
 
     let [info] = await connection.query(comando,
-        [feedback.data_feedback, feedback.qualidade_feedback, feedback.expectativa_feedback,
-             feedback.sabor_feedback, feedback.apresentacao_feedback, feedback.valor_feedback]);
+        [feedback.data_feedback, feedback.nvl_avaliacao_feedback, feedback.descricao_feedback]);
     
     return info.insertId;
 }
@@ -43,12 +42,11 @@ export async function pegarQuantidadeFeedbacks(){
 
 export async function atualizar(id, feedback){
     const comando = `UPDATE tb_feedback SET
-    data_feedback = ?, qualidade_feedback = ?, expectativa_feedback = ?, sabor_feedback = ?, apresentacao_feedback = ?,valor_feedback = ?
+    data_feedback = ?, nvl_avaliacao_feedback = ? , descricao_feedback = ?
     WHERE id_feedback = ?`;
 
     let [info] = await connection.query(comando,
-        [feedback.data_feedback, feedback.qualidade_feedback, feedback.expectativa_feedback,
-             feedback.sabor_feedback, feedback.apresentacao_feedback, feedback.valor_feedback, id]);
+        [feedback.data_feedback, feedback.nvl_avaliacao_feedback, feedback.descricao_feedback, id]);
 
     return info.affectedRows;
 }
