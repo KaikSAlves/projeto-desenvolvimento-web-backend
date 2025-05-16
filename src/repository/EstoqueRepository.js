@@ -25,22 +25,8 @@ export async function listar(){
         JOIN 
     tb_produto p ON e.id_produto = p.id_produto;`;
 
-    let [rows] = await connection.execute(comando);
-
-    const resp = rows.map(row => ({
-        id_estoque: row.id_estoque,
-        qtd_disponivel: row.qtd_disponivel,
-        qtd_min: row.qtd_min,
-        data_atualizacao: row.data_atualizacao,
-        produto: {
-          id_produto: row.id_produto,
-          tipo_produto: row.tipo_produto,
-          sabor_produto: row.sabor_produto,
-          desc_produto: row.desc_produto,
-          valor_produto: row.valor_produto
-        }
-      }));
-    return resp;
+    let info = await connection.execute(comando);
+    return info[0];
 }
 
 export async function buscarPorId(id){
@@ -55,22 +41,8 @@ export async function buscarPorId(id){
         WHERE
     e.id_estoque = ?;`;
 
-    let [rows] = await connection.execute(comando, [id]);
-
-    const resp = rows.map(row => ({
-        id_estoque: row.id_estoque,
-        qtd_disponivel: row.qtd_disponivel,
-        qtd_min: row.qtd_min,
-        data_atualizacao: row.data_atualizacao,
-        produto: {
-          id_produto: row.id_produto,
-          tipo_produto: row.tipo_produto,
-          sabor_produto: row.sabor_produto,
-          desc_produto: row.desc_produto,
-          valor_produto: row.valor_produto
-        }
-      }));
-    return resp;
+    let info = await connection.execute(comando, [id]);
+    return info[0];
 }
 
 //update
