@@ -36,6 +36,7 @@ create table if not exists tb_estoque (
     qtd_min int not null,
     data_atualizacao date
 );
+
 create table if not exists tb_venda (
 	id_venda int primary key auto_increment,
     id_estoque int,
@@ -44,4 +45,31 @@ create table if not exists tb_venda (
     valor_total double,
     data_venda date
 );
+
+DELIMITER $$
+
+CREATE TRIGGER trg_subtrair_estoque_depois_venda
+AFTER INSERT ON tb_venda
+FOR EACH ROW
+BEGIN
+    UPDATE tb_estoque
+    SET qtd_disponivel = qtd_disponivel - NEW.qtd_total
+    WHERE id_estoque = NEW.id_estoque;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_repor_estoque_depois_delete_venda
+AFTER DELETE ON tb_venda
+FOR EACH ROW
+BEGIN
+    UPDATE tb_estoque
+    SET qtd_disponivel = qtd_disponivel + OLD.qtd_total
+    WHERE id_estoque = OLD.id_estoque;
+END$$
+
+DELIMITER ;
+
 
