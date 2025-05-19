@@ -36,10 +36,11 @@ create table if not exists tb_estoque (
     qtd_min int not null,
     data_atualizacao date
 );
-create table tb_vendas (
+create table if not exists tb_venda (
 	id_venda int primary key auto_increment,
     id_estoque int,
     foreign key (id_estoque) references tb_estoque(id_estoque),
+    qtd_total int,
     valor_total double,
     data_venda date
 );
